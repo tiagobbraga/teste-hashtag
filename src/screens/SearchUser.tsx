@@ -1,6 +1,7 @@
 import React from 'react';
 import { Keyboard, FlatList, Alert } from 'react-native';
 import styled from 'styled-components/native';
+import ContainerViewInterface from '../interfaces/ContainerViewInterface';
 
 // comps
 import Title from '../shared/Title';
@@ -15,9 +16,6 @@ import IUser from '../interfaces/IUser';
 import Users from '../services/API/Users';
 
 // styled
-interface ContainerViewInterface {
-  backgroundColor: string;
-}
 const ContainerView = styled.View<ContainerViewInterface>`
   flex: 1;
   background: ${(props) => props.backgroundColor};

@@ -1,7 +1,12 @@
 import React from 'react';
-import { View, StyleSheet, Image, Text, Linking, Alert } from 'react-native';
+import { View, StyleSheet, Text, Linking, Alert } from 'react-native';
 import CustomButtom from './CustomButton';
+
+// interface
 import IUser from '../interfaces/IUser';
+
+// styled
+import { CommonText, CardView, AvatarImage, CenterView } from '../styled';
 
 export default ({ id, html_url, avatar_url, login, followers, following, onRemoveItem }: IUser) => {
   const onShowProfile = async (url: string) => {
@@ -14,40 +19,38 @@ export default ({ id, html_url, avatar_url, login, followers, following, onRemov
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.userArea}>
-        <Image style={styles.avatar} source={{ uri: avatar_url }} />
-        <Text style={styles.name}>{login}</Text>
-        <View style={styles.info}>
-          <Text>Seguidores {followers}</Text>
-          <Text>Seguindo {following}</Text>
+    <CardView backgroundColor='gray' padding={1} margin={10} borderRadius={10}>
+      <CardView backgroundColor='white' padding={10} borderRadius={10}>
+        <View style={styles.userArea}>
+          <CenterView>
+            <AvatarImage source={{ uri: avatar_url }} />
+            <CardView margin={5} backgroundColor='transparent'>
+              <CommonText color='black'>{login}</CommonText>
+            </CardView>
+          </CenterView>
+          <CenterView flexDirection='column' alignItems='flex-end' justifyContent='flex-end'>
+            <CommonText textAlign='right' color='black'>
+              Seguidores {followers}
+            </CommonText>
+            <CommonText textAlign='right' color='black'>
+              Seguindo {following}
+            </CommonText>
+          </CenterView>
         </View>
-      </View>
-      <CustomButtom onPress={() => onShowProfile(html_url)} title='Visualizar perfil' />
-      <View style={styles.space} />
-      <CustomButtom onPress={() => onRemoveItem(id)} title='Remover perfil' color='red' />
-    </View>
+        <CustomButtom onPress={() => onShowProfile(html_url)} title='Visualizar perfil' />
+        <View style={styles.space} />
+        <CustomButtom onPress={() => onRemoveItem(id)} title='Remover perfil' color='red' />
+      </CardView>
+    </CardView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    padding: 10,
-    margin: 10,
-    borderRadius: 10,
-    borderWidth: 1,
-    borderBottomColor: '#e1e4e8',
-    backgroundColor: 'white',
-  },
   userArea: {
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'space-between',
     marginBottom: 5,
-  },
-  avatar: {
-    width: 40,
-    height: 40,
-    borderRadius: 10,
   },
   name: {
     flex: 1,

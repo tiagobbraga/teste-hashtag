@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { CenterView, CommonText, CardView } from '../styled';
 
 interface Props {
   total: number;
@@ -8,8 +8,10 @@ interface Props {
 export default ({ total }: Props) => {
   if (!total || total === 0) return null;
   return (
-    <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Total de usuários: {total}</Text>
-    </View>
+    <CardView backgroundColor='#f1f1f1' padding={5}>
+      <CenterView>
+        <CommonText color='black'>Total de usuários: {total}</CommonText>
+      </CenterView>
+    </CardView>
   );
 };

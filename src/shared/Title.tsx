@@ -1,5 +1,6 @@
 import React from 'react';
-import { Image, View, Text, ImageSourcePropType } from 'react-native';
+import { Image, Text, ImageSourcePropType } from 'react-native';
+import { CenterView, CommonText } from '../styled';
 
 interface Props {
   urlImage?: ImageSourcePropType;
@@ -8,9 +9,11 @@ interface Props {
 
 export default ({ urlImage, title }: Props) => {
   return (
-    <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+    <CenterView flexDirection='column' backgroundColor='transparent'>
       {urlImage && <Image source={urlImage} style={{ width: 40, height: 40 }} />}
-      <Text>{title}</Text>
-    </View>
+      <CommonText fontWeight='400' fontSize={18} color='black'>
+        {title}
+      </CommonText>
+    </CenterView>
   );
 };
