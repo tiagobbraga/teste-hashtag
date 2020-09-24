@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, StyleSheet, Keyboard, FlatList, Alert } from 'react-native';
+import { Keyboard, FlatList, Alert } from 'react-native';
+import styled from 'styled-components/native';
 
 // comps
 import Title from '../shared/Title';
@@ -12,6 +13,15 @@ import IUser from '../interfaces/IUser';
 
 // api
 import Users from '../services/API/Users';
+
+// styled
+interface ContainerViewInterface {
+  backgroundColor: string;
+}
+const ContainerView = styled.View<ContainerViewInterface>`
+  flex: 1;
+  background: ${(props) => props.backgroundColor};
+`;
 
 export const hasUserInList = (data: Array<IUser>, id: number) => {
   const users = data.filter((item) => item.id === id);
@@ -29,7 +39,8 @@ export default () => {
       const { data } = await Users.searchUserByName(term);
       addNewUser(data);
     } catch (error) {
-      console.error(error);
+      console.log(error);
+      Alert.alert('Usuário não encontrado!');
     }
     setLoading(false);
   };
@@ -48,25 +59,15 @@ export default () => {
   };
 
   return (
-    <View style={[styles.page, styles.flex]}>
+    <ContainerView backgroundColor='#f6f8fa'>
       <Title urlImage={require('../../assets/github.png')} title='Teste' />
       <SearchArea onFind={onFind} loading={loading} />
       <CountUsers total={users.length} />
       <FlatList
         data={users}
-        style={styles.flex}
         renderItem={({ item }) => <UserItem {...item} onRemoveItem={onRemoveItem} />}
         keyExtractor={(item: IUser) => item.id.toString()}
       />
-    </View>
+    </ContainerView>
   );
 };
-
-const styles = StyleSheet.create({
-  flex: {
-    flex: 1,
-  },
-  page: {
-    backgroundColor: '#f6f8fa',
-  },
-});

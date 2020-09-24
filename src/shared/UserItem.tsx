@@ -19,8 +19,8 @@ export default ({ id, html_url, avatar_url, login, followers, following, onRemov
         <Image style={styles.avatar} source={{ uri: avatar_url }} />
         <Text style={styles.name}>{login}</Text>
         <View style={styles.info}>
-          <Text>Followers {followers}</Text>
-          <Text>Following {following}</Text>
+          <Text>Seguidores {followers}</Text>
+          <Text>Seguindo {following}</Text>
         </View>
       </View>
       <CustomButtom onPress={() => onShowProfile(html_url)} title='Visualizar perfil' />
