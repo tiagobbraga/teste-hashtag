@@ -1,10 +1,10 @@
-import React from 'react';
-import { View, Text, StyleSheet, TouchableWithoutFeedback } from 'react-native';
+import React, { Children } from 'react';
+import { View, Text, StyleSheet, TouchableWithoutFeedback, GestureResponderEvent, Image } from 'react-native';
 
 interface Props {
   title: string;
   color?: string;
-  onPress: Function;
+  onPress: (event: GestureResponderEvent) => void;
 }
 
 export default ({ title, color = '#2ea44f', onPress }: Props) => {
@@ -19,7 +19,6 @@ export default ({ title, color = '#2ea44f', onPress }: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    minWidth: 80,
     height: 40,
     borderRadius: 10,
     alignItems: 'center',

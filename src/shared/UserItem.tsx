@@ -1,9 +1,18 @@
 import React from 'react';
-import { View, StyleSheet, Image, Text, Button } from 'react-native';
-import CustomButtom from './CustomButtom';
+import { View, StyleSheet, Image, Text, Linking, Alert } from 'react-native';
+import CustomButtom from './CustomButton';
 import IUser from '../interfaces/IUser';
 
-export default ({ id, url, html_url, avatar_url, login, followers, following, onShowProfile, onRemoveItem }: IUser) => {
+export default ({ id, html_url, avatar_url, login, followers, following, onRemoveItem }: IUser) => {
+  const onShowProfile = async (url: string) => {
+    const supported = await Linking.canOpenURL(url);
+    if (supported) {
+      await Linking.openURL(url);
+    } else {
+      Alert.alert(`Não foi possível abrir a url ${url}`);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.userArea}>

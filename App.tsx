@@ -1,14 +1,15 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
+import { SafeAreaView } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
 
 // screen
-import Github from './screens/Github';
+import SearchUser from './src/screens/SearchUser';
 
 export default function App() {
   return (
-    <>
-      <Github />
+    <SafeAreaView style={{ flex: 1 }}>
+      <SearchUser />
       <StatusBar style='auto' />
-    </>
+    </SafeAreaView>
   );
 }
